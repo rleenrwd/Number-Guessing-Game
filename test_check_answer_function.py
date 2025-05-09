@@ -42,5 +42,15 @@ class CheckAnswerTest(unittest.TestCase):
         self.assertTrue(result)
         self.assertEqual(main.num_of_guesses_left, 3)
 
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_game_over_msg(self, mock_stdout):
+        main.num_of_guesses_left = 1
+        result = main.check_answer(30, 100)
+        self.assertIsNone(result)
+        output = mock_stdout.getvalue()
+        self.assertEqual(f"Your answer, 30, was too low, try again.\nYou have {main.num_of_guesses_left} guesses left.\nGAME OVER.\n", output)
+        self.assertEqual(main.num_of_guesses_left, 0)
+
+
 if __name__ == '__main__':
     unittest.main()
