@@ -13,10 +13,10 @@ class CheckAnswerTest(unittest.TestCase):
     # captured and examined in the tests
     @patch('sys.stdout', new_callable=StringIO)
     def test_guess_too_high(self, mock_stdout):
-        result = main.check_answer(user_guess, 50)
+        result = main.check_answer(user_guess, 1)
         # This will check that result is 'None' since there's no return statement only print statements
         self.assertIsNone(result)
-        
+
         # This will store the output, which should be "Your answer, {user_guess}, was too high, try again." 
         # And also, "You have {num_of_guesses_left} guesses left."
         output = mock_stdout.getvalue()
@@ -24,6 +24,16 @@ class CheckAnswerTest(unittest.TestCase):
         self.assertEqual(f"Your answer, {user_guess}, was too high, try again.\nYou have {main.num_of_guesses_left} guesses left.\n", output)
 
         self.assertEqual(main.num_of_guesses_left, 2)
+
+  
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_guess_too_low(self, mock_stdout):
+        result = main.check_answer(user_guess, 100)
+        self.assertIsNone(result)
+        output = mock_stdout.getvalue()
+        self.assertEqual(f"Your answer, {user_guess}, was too low, try again.\nYou have {main.num_of_guesses_left} guesses left.\n", output)
+        self.assertEqual(main.num_of_guesses_left, 2)
+ 
 
 if __name__ == '__main__':
     unittest.main()
