@@ -34,6 +34,13 @@ class CheckAnswerTest(unittest.TestCase):
         self.assertEqual(f"Your answer, {user_guess}, was too low, try again.\nYou have {main.num_of_guesses_left} guesses left.\n", output)
         self.assertEqual(main.num_of_guesses_left, 2)
  
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_correct_guess(self, mock_stdout):
+        result = main.check_answer(50, 50)
+        output = mock_stdout.getvalue()
+        self.assertIn("CORRECT!", output)
+        self.assertTrue(result)
+        self.assertEqual(main.num_of_guesses_left, 3)
 
 if __name__ == '__main__':
     unittest.main()
