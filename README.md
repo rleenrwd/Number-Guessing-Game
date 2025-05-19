@@ -33,10 +33,24 @@ Run the game with:
 
 python main.py
 
+## 🧪 Testing
+This project includes automated test cases written using Python’s built-in unittest framework.
+
+To run the tests:
+
+python -m unittest test_main.py
+
+These tests check the following:
+
+Validating input and user guesses
+
+Checking that the guess is within the specified range (1–100).
+
+Game logic correctness (e.g., too high, too low, correct guess)
+
 ## 🧠 What I Learned
 Enhanced understanding of Python's random module for generating random numbers.
 
 Improved skills in handling user input and providing real-time feedback.
 
 Developed a simple yet engaging command-line game, reinforcing programming fundamentals.
-
